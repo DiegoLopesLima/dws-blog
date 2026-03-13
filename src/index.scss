@@ -1,3 +1,28 @@
-.hello {
-  color: red;
+@use "styles/reset";
+@use "styles/variables" as *;
+
+body {
+  font-family: "Open Sans", system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --color-neutral-lightest: #{$neutral-lightest};
+  --color-neutral-extra-light: #{$neutral-extra-light};
+  --color-neutral-light: #{$neutral-light};
+  --color-neutral-medium: #{$neutral-medium};
+  --color-neutral-dark: #{$neutral-dark};
+  --color-neutral-extra-dark: #{$neutral-extra-dark};
+  --color-neutral-darkest: #{$neutral-darkest};
+
+  --color-primary-light: #{$primary-light};
+  --color-primary-medium: #{$primary-medium};
+  --color-primary-dark: #{$primary-dark};
+
+  --color-secondary-light: #{$secondary-light};
+  --color-secondary-medium: #{$secondary-medium};
+  --color-secondary-dark: #{$secondary-dark};
+
+  --color-accent-light: #{$accent-light};
+  --color-accent-medium: #{$accent-medium};
+  --color-accent-dark: #{$accent-dark};
 }
