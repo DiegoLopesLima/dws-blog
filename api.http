@@ -1,0 +1,35 @@
+@baseUrl = {{$dotenv PUBLIC_API_BASE_URL}}
+@accept = application/json
+
+
+### Posts
+
+GET {{baseUrl}}/posts
+Accept: {{accept}}
+
+###
+
+GET {{baseUrl}}/posts/1
+Accept: {{accept}}
+
+
+### Authors
+
+GET {{baseUrl}}/authors
+Accept: {{accept}}
+
+###
+
+GET {{baseUrl}}/authors/1
+Accept: {{accept}}
+
+
+### Categories
+
+GET {{baseUrl}}/categories
+Accept: {{accept}}
+
+###
+
+GET {{baseUrl}}/categories/1
+Accept: {{accept}}
