@@ -1,4 +1,4 @@
-@baseUrl = {{$dotenv PUBLIC_API_BASE_URL}}
+@baseUrl = {{$dotenv VITE_PUBLIC_API_BASE_URL}}
 @accept = application/json
 
 
