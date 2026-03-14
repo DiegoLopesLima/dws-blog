@@ -1,0 +1,21 @@
+@use "@/styles/variables" as *;
+
+.container {
+  padding-left: $container-p-x;
+  padding-right: $container-p-x;
+  max-width: $breakpoint-sm;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: $breakpoint-md) {
+    max-width: $breakpoint-md;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    max-width: $breakpoint-lg;
+  }
+
+  @media (min-width: $breakpoint-xl) {
+    max-width: $breakpoint-xl;
+  }
+}

@@ -1,0 +1,97 @@
+@use "@/styles/variables" as *;
+
+$padding: 0.5rem;
+$border-radius: 1.75rem;
+$border-size: 0.0625rem;
+$size: 3.5rem;
+$transitions-duration: 0.25s;
+
+.search-field {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: $container-p-x - $border-size;
+  padding: $padding;
+  border-radius: $border-radius;
+  width: $size - $border-size;
+  max-width: $breakpoint-md;
+  height: $size - $border-size;
+  background-color: transparent;
+  border: $border-size solid transparent;
+  transition:
+    background-color $transitions-duration ease-in-out,
+    width $transitions-duration ease-in-out,
+    border-color $transitions-duration ease-in-out;
+
+  &-open {
+    width: calc(100% - $container-p-x * 2);
+    border-color: $accent-medium;
+    background-color: #FFFFFF;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    width: $breakpoint-md;
+    border-color: $neutral-extra-light;
+    background-color: #FFFFFF;
+
+    &:focus-within {
+      border-color: $accent-medium !important;
+    }
+  }
+
+  &-input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    transition:
+      width $transitions-duration ease-in-out,
+      opacity $transitions-duration ease-in-out;
+    height: 100%;
+    padding-left: $padding;
+    opacity: 0;
+    color: $neutral-extra-dark;
+
+    &:focus {
+      width: 100%;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  &-open &-input {
+    opacity: 1;
+  }
+
+  &-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    color: $neutral-lightest;
+    border: none;
+    background-color: $primary-dark;
+    position: absolute;
+    right: $padding;
+    top: 0;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%) scale(1);
+    cursor: pointer;
+
+    &-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  &-open &-button {
+    pointer-events: none;
+  }
+}

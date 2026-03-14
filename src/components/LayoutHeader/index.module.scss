@@ -1,0 +1,28 @@
+@use "@/styles/variables" as *;
+
+.layout-header {
+  padding: 1rem;
+  border-bottom: 1px solid $neutral-extra-light;
+  margin-bottom: 1.5rem;
+  height: 90px;
+
+  &-container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  &-logo-link {
+    transition: opacity 0.25s ease-in-out;
+  }
+
+  &-search-open &-logo-link {
+    opacity: 0;
+
+    @media (min-width: $breakpoint-lg) {
+      opacity: 1;
+    }
+  }
+}
