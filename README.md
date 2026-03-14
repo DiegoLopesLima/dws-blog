@@ -10,9 +10,9 @@
 
 Make sure you have the following environment variables:
 
-| Variable name         | Expected value           |
-| --------------------- | ------------------------ |
-| `PUBLIC_API_BASE_URL` | The public API base URL. |
+| Variable name              | Expected value           |
+| -------------------------- | ------------------------ |
+| `VITE_PUBLIC_API_BASE_URL` | The public API base URL. |
 
 ### Development
 
