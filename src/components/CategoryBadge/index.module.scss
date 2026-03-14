@@ -1,0 +1,14 @@
+@use "@/styles/variables" as *;
+
+.category-badge {
+  padding: 0.5rem 0.75rem;
+  border-radius: 2.625rem;
+  background-color: $neutral-lightest;
+  display: inline-flex;
+  font-size: $text-xs;
+  font-weight: $text-xs-font-weight;
+  line-height: $text-xs-line-height;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+}

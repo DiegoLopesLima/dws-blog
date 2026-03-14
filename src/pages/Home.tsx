@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PostGrid from "@/components/PostGrid";
 import { getPosts } from "@/services/posts";
 import type { Post } from "@/types/post";
 
@@ -11,15 +12,7 @@ function HomePage() {
     });
   }, []);
 
-  return (
-    <div className="posts">
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-        </div>
-      ))}
-    </div>
-  );
+  return <PostGrid posts={posts} />;
 }
 
 export default HomePage;
