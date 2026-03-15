@@ -1,0 +1,23 @@
+.combobox {
+  &-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 204px;
+  }
+
+  &-option {
+    &-icon {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    &-selected &-icon {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}

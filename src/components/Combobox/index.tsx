@@ -1,6 +1,5 @@
 import { Icon, loadIcons } from "@iconify/react";
 import { clsx } from "clsx";
-import { useState } from "react";
 import { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "../Dropdown";
 import styles from "./index.module.scss";
 
@@ -19,18 +18,14 @@ export type ComboboxProps = {
 loadIcons(["mdi:check"]);
 
 function Combobox({ label = "Select an option", options, value = [], onChange }: ComboboxProps) {
-  const [selectedOptions, setSelectedOptions] = useState<ComboboxOption[]>(value);
+  const selectedOptions = value;
 
   const handleSelectOption = (option: ComboboxOption) => {
-    setSelectedOptions((state) => {
-      if (state.includes(option)) {
-        return state.filter((selectedOption) => selectedOption.value !== option.value);
-      }
+    const next = selectedOptions.some((selectedOption) => selectedOption.value === option.value)
+      ? selectedOptions.filter((selectedOption) => selectedOption.value !== option.value)
+      : [...selectedOptions, option];
 
-      return [...state, option];
-    });
-
-    onChange?.(selectedOptions);
+    onChange?.(next);
   };
 
   return (
@@ -46,10 +41,12 @@ function Combobox({ label = "Select an option", options, value = [], onChange }:
       <DropdownContent>
         {options.map((option) => (
           <DropdownItem
-            key={option.label}
+            key={option.value as string}
             onClick={() => handleSelectOption(option)}
             className={clsx(styles["combobox-option"], {
-              [styles["combobox-option-selected"]]: selectedOptions.includes(option),
+              [styles["combobox-option-selected"]]: selectedOptions.some(
+                (selectedOption) => selectedOption.value === option.value,
+              ),
             })}
           >
             <Icon icon="mdi:check" className={styles["combobox-option-icon"]} />

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Container from "@/components/Container";
 import MobileFilter from "@/components/MobileFilter";
-
 import PostGrid from "@/components/PostGrid";
 import { getPosts } from "@/services/posts";
 import type { Post } from "@/types/post";

@@ -1,15 +1,19 @@
+import { NuqsAdapter } from "nuqs/adapters/react";
 import { Outlet } from "react-router";
 import LayoutHeader from "@/components/LayoutHeader";
+import FilterProvider from "@/providers/FilterProvider";
 
 function App() {
   return (
-    <>
-      <LayoutHeader />
+    <NuqsAdapter>
+      <FilterProvider>
+        <LayoutHeader />
 
-      <main>
-        <Outlet />
-      </main>
-    </>
+        <main>
+          <Outlet />
+        </main>
+      </FilterProvider>
+    </NuqsAdapter>
   );
 }
 
