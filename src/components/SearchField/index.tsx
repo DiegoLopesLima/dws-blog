@@ -11,9 +11,9 @@ function SearchField() {
   const inputRef = useRef<HTMLInputElement>(null);
   const isSearchFieldOpen = useUserInterfaceStore((state) => state.isSearchFieldOpen);
   const setIsSearchFieldOpen = useUserInterfaceStore((state) => state.setIsSearchFieldOpen);
-  const [search, setSearch] = useState("");
+  const { searchFilter, setSearchFilter } = useFilterContext();
+  const [search, setSearch] = useState(searchFilter ?? "");
   const [debouncedSearch] = useDebounceValue(search, HALF_SECOND_IN_MILLISECONDS);
-  const { setSearchFilter } = useFilterContext();
 
   const handleClickButton = () => {
     inputRef.current?.focus();
