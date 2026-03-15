@@ -1,32 +1,17 @@
-import { Icon } from "@iconify/react";
-import { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "@/components/Dropdown";
+import Combobox from "@/components/Combobox";
 
 function MobileFilter() {
-  const handleClick = (item: string) => {
-    console.log(item);
-  };
+  const options = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" },
+    { label: "Option 4", value: "option4" },
+    { label: "Option 5", value: "option5" },
+  ];
 
   return (
     <div>
-      <Dropdown>
-        <DropdownTrigger variant="outline">
-          <span>Trigger</span>
-
-          <Icon icon="mdi:chevron-down" />
-        </DropdownTrigger>
-
-        <DropdownContent>
-          <DropdownItem onClick={() => handleClick("Item 1")}>Item 1</DropdownItem>
-
-          <DropdownItem onClick={() => handleClick("Item 2")}>Item 2</DropdownItem>
-
-          <DropdownItem onClick={() => handleClick("Item 3")}>Item 3</DropdownItem>
-
-          <DropdownItem onClick={() => handleClick("Item 4")}>Item 4</DropdownItem>
-
-          <DropdownItem onClick={() => handleClick("Item 5")}>Item 5</DropdownItem>
-        </DropdownContent>
-      </Dropdown>
+      <Combobox label="Category" options={options} />
     </div>
   );
 }

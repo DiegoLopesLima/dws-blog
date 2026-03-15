@@ -10,6 +10,9 @@
   background-color: transparent;
   border: none;
   color: $neutral-darkest;
+  font-size: $text-sm;
+  height: 1.75rem;
+  align-items: center;
 
   &:hover {
     background-color: color.change($accent-light, $alpha: 0.05);

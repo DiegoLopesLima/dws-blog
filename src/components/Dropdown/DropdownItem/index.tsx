@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import type { ButtonHTMLAttributes, KeyboardEvent, MouseEvent, ReactNode } from "react";
 import { useDropdownContext } from "../DropdownContext";
 import styles from "./index.module.scss";
@@ -6,7 +7,7 @@ type DropdownItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
 };
 
-function DropdownItem({ children, onClick, ...props }: DropdownItemProps) {
+function DropdownItem({ children, className, onClick, ...props }: DropdownItemProps) {
   const { triggerRef, setOpen, closeOnSelect } = useDropdownContext();
 
   const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
@@ -49,7 +50,7 @@ function DropdownItem({ children, onClick, ...props }: DropdownItemProps) {
   return (
     <button
       type="button"
-      className={styles["dropdown-item"]}
+      className={clsx(styles["dropdown-item"], className)}
       role="menuitem"
       onKeyDown={handleKeyDown}
       onClick={handleClick}
