@@ -3,6 +3,16 @@
 
 body {
   font-family: "Open Sans", system-ui, -apple-system, sans-serif;
+  line-height: $text-sm-line-height;
+  font-weight: $text-sm-font-weight;
+  color: $neutral-darkest;
+  font-size: $text-sm;
+
+  @media (min-width: $breakpoint-lg) {
+    font-size: $text-base;
+    line-height: $text-base-line-height;
+    font-weight: $text-base-font-weight;
+  }
 }
 
 .sr-only {
@@ -15,26 +25,4 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-:root {
-  --color-neutral-lightest: #{$neutral-lightest};
-  --color-neutral-extra-light: #{$neutral-extra-light};
-  --color-neutral-light: #{$neutral-light};
-  --color-neutral-medium: #{$neutral-medium};
-  --color-neutral-dark: #{$neutral-dark};
-  --color-neutral-extra-dark: #{$neutral-extra-dark};
-  --color-neutral-darkest: #{$neutral-darkest};
-
-  --color-primary-light: #{$primary-light};
-  --color-primary-medium: #{$primary-medium};
-  --color-primary-dark: #{$primary-dark};
-
-  --color-secondary-light: #{$secondary-light};
-  --color-secondary-medium: #{$secondary-medium};
-  --color-secondary-dark: #{$secondary-dark};
-
-  --color-accent-light: #{$accent-light};
-  --color-accent-medium: #{$accent-medium};
-  --color-accent-dark: #{$accent-dark};
 }

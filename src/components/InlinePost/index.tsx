@@ -1,19 +1,20 @@
+import type { HTMLAttributes } from "react";
 import { NavLink } from "react-router";
 import CategoryBadge from "@/components/CategoryBadge";
 import { dateFormatter } from "@/formatters/time";
 import type { Post } from "@/types/post";
 import styles from "./index.module.scss";
 
-type InlinePostProps = {
+type InlinePostProps = HTMLAttributes<HTMLDivElement> & {
   post: Post;
 };
 
-function InlinePost({ post }: InlinePostProps) {
+function InlinePost({ post, ...props }: InlinePostProps) {
   const navTo = `/${post.id}`;
   const formattedDate = dateFormatter.format(new Date(post.createdAt));
 
   return (
-    <div className={styles["inline-post"]}>
+    <div className={styles["inline-post"]} {...props}>
       <NavLink to={navTo} className={styles["inline-post-thumbnail-link"]}>
         <img
           src={post.thumbnail_url}
