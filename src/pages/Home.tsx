@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Container from "@/components/Container";
+import MobileFilter from "@/components/MobileFilter";
+
 import PostGrid from "@/components/PostGrid";
 import { getPosts } from "@/services/posts";
 import type { Post } from "@/types/post";
@@ -14,9 +16,15 @@ function HomePage() {
   }, []);
 
   return (
-    <Container>
-      <PostGrid posts={posts} />
-    </Container>
+    <>
+      <Container>
+        <MobileFilter />
+      </Container>
+
+      <Container>
+        <PostGrid posts={posts} />
+      </Container>
+    </>
   );
 }
 

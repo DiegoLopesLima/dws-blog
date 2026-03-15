@@ -1,18 +1,22 @@
 import { clsx } from "clsx";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from "react";
 import styles from "./index.module.scss";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   className?: string;
   variant?: "primary" | "outline";
   block?: boolean;
 };
 
-function Button({ children, className, variant = "primary", block = false, ...props }: ButtonProps) {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  { children, className, variant = "primary", block = false, ...props }: ButtonProps,
+  ref,
+) {
   return (
     <button
       type="button"
+      ref={ref}
       className={clsx(
         styles["button"],
         styles[`button-variant-${variant}`],
@@ -26,6 +30,6 @@ function Button({ children, className, variant = "primary", block = false, ...pr
       {children}
     </button>
   );
-}
+});
 
 export default Button;

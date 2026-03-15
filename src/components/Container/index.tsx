@@ -2,7 +2,7 @@ import { clsx } from "clsx";
 import type { HTMLAttributes, ReactNode } from "react";
 import styles from "./index.module.scss";
 
-type ContainerProps = HTMLAttributes<HTMLDivElement> & {
+export type ContainerProps = HTMLAttributes<HTMLDivElement> & {
   children: ReactNode;
   className?: string;
 };

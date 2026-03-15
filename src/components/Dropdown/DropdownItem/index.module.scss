@@ -1,0 +1,18 @@
+@use "sass:color";
+@use "@/styles/variables" as *;
+
+.dropdown-item {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: $neutral-darkest;
+
+  &:hover {
+    background-color: color.change($accent-light, $alpha: 0.05);
+    color: $accent-dark;
+  }
+}

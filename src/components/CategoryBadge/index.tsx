@@ -2,7 +2,7 @@ import type { HTMLAttributes } from "react";
 import type { Category } from "@/types/category";
 import styles from "./index.module.scss";
 
-type CategoryBadgeProps = HTMLAttributes<HTMLDivElement> & {
+export type CategoryBadgeProps = HTMLAttributes<HTMLDivElement> & {
   category: Category;
 };
 
