@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   className?: string;
-  variant?: "primary" | "outline";
+  variant?: "primary" | "outline" | "ghost";
   block?: boolean;
 };
 

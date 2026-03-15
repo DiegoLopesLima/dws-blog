@@ -1,5 +1,6 @@
 import AuthorCombobox from "../AuthorCombobox";
 import CategoryCombobox from "../CategoryCombobox";
+import OrderByButton from "../OrderByButton";
 import styles from "./index.module.scss";
 
 function MobileFilter() {
@@ -8,6 +9,8 @@ function MobileFilter() {
       <CategoryCombobox />
 
       <AuthorCombobox />
+
+      <OrderByButton />
     </div>
   );
 }

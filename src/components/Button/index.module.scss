@@ -20,6 +20,11 @@
     border-color 0.25s ease-in-out,
     color 0.25s ease-in-out;
 
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
   &-variant {
     &-primary {
       border-color: $secondary-medium;
@@ -41,15 +46,29 @@
         background-color: color.change($secondary-medium, $alpha: 0.05);
       }
     }
+
+    &-ghost {
+      border-color: transparent;
+      background-color: transparent;
+      color: $neutral-dark;
+
+      svg {
+        color: $accent-medium;
+      }
+
+      &:hover {
+        background-color: $accent-medium;
+        color: $neutral-extra-light;
+
+        svg {
+          color: $neutral-extra-light;
+        }
+      }
+    }
   }
 
   &-block {
     display: flex;
     width: 100%;
-  }
-
-  svg {
-    width: 1.25rem;
-    height: 1.25rem;
   }
 }

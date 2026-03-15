@@ -1,0 +1,11 @@
+@use "@/styles/variables" as *;
+
+.order-by-button {
+  &-label {
+    display: none;
+
+    @media (min-width: $breakpoint-lg) {
+      display: inline;
+    }
+  }
+}
