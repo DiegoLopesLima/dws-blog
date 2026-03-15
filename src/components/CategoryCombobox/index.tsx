@@ -45,13 +45,7 @@ function CategoryCombobox() {
     }));
   }, [categories]);
 
-  return (
-    <>
-      <pre>{JSON.stringify(selectedCategories)}</pre>
-
-      <Combobox label="Category" options={options} value={selectedCategories} onChange={handleChange} />
-    </>
-  );
+  return <Combobox label="Category" options={options} value={selectedCategories} onChange={handleChange} />;
 }
 
 export default CategoryCombobox;
