@@ -1,5 +1,5 @@
 import { autoUpdate, flip, type Placement, shift, useFloating } from "@floating-ui/react";
-import { type ReactNode, useEffect, useId, useRef, useState } from "react";
+import { type ReactNode, useEffect, useId, useMemo, useRef, useState } from "react";
 import { DropdownContext } from "./DropdownContext";
 
 export type DropdownRootProps = {
@@ -21,6 +21,21 @@ function DropdownRoot({ children, placement = "bottom-start", closeOnSelect = tr
     whileElementsMounted: autoUpdate,
     middleware: [flip(), shift()],
   });
+
+  const value = useMemo(
+    () => ({
+      open,
+      setOpen,
+      triggerRef,
+      triggerId,
+      contentRef,
+      contentId,
+      floatingRefs: refs,
+      floatingStyles,
+      closeOnSelect,
+    }),
+    [open, triggerId, contentId, refs, floatingStyles, closeOnSelect],
+  );
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -53,23 +68,7 @@ function DropdownRoot({ children, placement = "bottom-start", closeOnSelect = tr
     };
   }, []);
 
-  return (
-    <DropdownContext.Provider
-      value={{
-        open,
-        setOpen,
-        triggerRef,
-        triggerId,
-        contentRef,
-        contentId,
-        floatingRefs: refs,
-        floatingStyles,
-        closeOnSelect,
-      }}
-    >
-      {children}
-    </DropdownContext.Provider>
-  );
+  return <DropdownContext.Provider value={value}>{children}</DropdownContext.Provider>;
 }
 
 export default DropdownRoot;
