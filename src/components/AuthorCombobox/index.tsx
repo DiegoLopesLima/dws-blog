@@ -19,7 +19,6 @@ function AuthorCombobox() {
       };
     });
   }, [authorsFilter, authors]);
-  const [selectedAuthors, setSelectedAuthors] = useState<ComboboxOption[]>([]);
 
   useEffect(() => {
     getAuthors().then((authors) => {
@@ -27,14 +26,7 @@ function AuthorCombobox() {
     });
   }, []);
 
-  useEffect(() => {
-    if (authors.length > 0) {
-      setSelectedAuthors(parsedAuthorsFilter);
-    }
-  }, [authors.length, parsedAuthorsFilter]);
-
   const handleChange = (selectedAuthors: ComboboxOption[]) => {
-    setSelectedAuthors(selectedAuthors);
     setAuthorsFilter(selectedAuthors.map((author) => author.value as string));
   };
 
@@ -45,7 +37,7 @@ function AuthorCombobox() {
     }));
   }, [authors]);
 
-  return <Combobox label="Author" options={options} value={selectedAuthors} onChange={handleChange} />;
+  return <Combobox label="Author" options={options} value={parsedAuthorsFilter} onChange={handleChange} />;
 }
 
 export default AuthorCombobox;

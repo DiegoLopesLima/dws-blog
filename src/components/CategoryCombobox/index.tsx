@@ -19,7 +19,6 @@ function CategoryCombobox() {
       };
     });
   }, [categoriesFilter, categories]);
-  const [selectedCategories, setSelectedCategories] = useState<ComboboxOption[]>([]);
 
   useEffect(() => {
     getCategories().then((categories) => {
@@ -27,14 +26,7 @@ function CategoryCombobox() {
     });
   }, []);
 
-  useEffect(() => {
-    if (categories.length > 0) {
-      setSelectedCategories(parsedCategoriesFilter);
-    }
-  }, [categories.length, parsedCategoriesFilter]);
-
   const handleChange = (selectedCategories: ComboboxOption[]) => {
-    setSelectedCategories(selectedCategories);
     setCategoriesFilter(selectedCategories.map((category) => category.value as string));
   };
 
@@ -45,7 +37,7 @@ function CategoryCombobox() {
     }));
   }, [categories]);
 
-  return <Combobox label="Category" options={options} value={selectedCategories} onChange={handleChange} />;
+  return <Combobox label="Category" options={options} value={parsedCategoriesFilter} onChange={handleChange} />;
 }
 
 export default CategoryCombobox;

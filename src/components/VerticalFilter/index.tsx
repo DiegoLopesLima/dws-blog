@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { clsx } from "clsx";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFilterContext } from "@/providers/FilterProvider";
 import { getAuthors } from "@/services/authors";
 import { getCategories } from "@/services/categories";
@@ -16,32 +16,6 @@ function VerticalFilter() {
   const [selectedAuthors, setSelectedAuthors] = useState<Author[]>([]);
   const { categoriesFilter, authorsFilter, setCategoriesFilter, setAuthorsFilter } = useFilterContext();
 
-  const parsedCategoriesFilter = useMemo(() => {
-    if (categories.length === 0) return [];
-
-    return categoriesFilter.map((categoryId) => {
-      const category = categories.find(({ id }) => id === categoryId);
-
-      return {
-        label: category?.name as string,
-        value: category?.id as string,
-      };
-    });
-  }, [categoriesFilter, categories]);
-
-  const parsedAuthorsFilter = useMemo(() => {
-    if (authors.length === 0) return [];
-
-    return authorsFilter.map((authorId) => {
-      const author = authors.find(({ id }) => id === authorId);
-
-      return {
-        label: author?.name as string,
-        value: author?.id as string,
-      };
-    });
-  }, [authorsFilter, authors]);
-
   useEffect(() => {
     getCategories().then((categories) => {
       setCategories(categories);
@@ -56,21 +30,19 @@ function VerticalFilter() {
 
   useEffect(() => {
     if (categories.length > 0) {
-      setSelectedCategories(
-        parsedCategoriesFilter.map((category) => categories.find(({ id }) => id === category.value) as Category),
-      );
+      setSelectedCategories(categories.filter((category) => categoriesFilter.includes(category.id)));
     }
-  }, [categories.length, parsedCategoriesFilter, categories]);
+  }, [categories.length, categoriesFilter, categories]);
 
   useEffect(() => {
     if (authors.length > 0) {
-      setSelectedAuthors(parsedAuthorsFilter.map((author) => authors.find(({ id }) => id === author.value) as Author));
+      setSelectedAuthors(authors.filter((author) => authorsFilter.includes(author.id)));
     }
-  }, [authors.length, parsedAuthorsFilter, authors]);
+  }, [authors.length, authorsFilter, authors]);
 
   const handleSelectCategory = (category: Category) => {
     setSelectedCategories((state) =>
-      state.includes(category)
+      state.some((selectedCategory) => selectedCategory.id === category.id)
         ? state.filter((selectedCategory) => selectedCategory.id !== category.id)
         : [...state, category],
     );
@@ -78,7 +50,9 @@ function VerticalFilter() {
 
   const handleSelectAuthor = (author: Author) => {
     setSelectedAuthors((state) =>
-      state.includes(author) ? state.filter((selectedAuthor) => selectedAuthor.id !== author.id) : [...state, author],
+      state.some((selectedAuthor) => selectedAuthor.id === author.id)
+        ? state.filter((selectedAuthor) => selectedAuthor.id !== author.id)
+        : [...state, author],
     );
   };
 
@@ -105,7 +79,9 @@ function VerticalFilter() {
                 type="button"
                 key={category.id}
                 className={clsx(styles["vertical-filter-box-options-list-item"], {
-                  [styles["vertical-filter-box-options-list-item-selected"]]: selectedCategories.includes(category),
+                  [styles["vertical-filter-box-options-list-item-selected"]]: selectedCategories.some(
+                    (selectedCategory) => selectedCategory.id === category.id,
+                  ),
                 })}
                 onClick={() => handleSelectCategory(category)}
               >
@@ -124,7 +100,9 @@ function VerticalFilter() {
                 type="button"
                 key={author.id}
                 className={clsx(styles["vertical-filter-box-options-list-item"], {
-                  [styles["vertical-filter-box-options-list-item-selected"]]: selectedAuthors.includes(author),
+                  [styles["vertical-filter-box-options-list-item-selected"]]: selectedAuthors.some(
+                    (selectedAuthor) => selectedAuthor.id === author.id,
+                  ),
                 })}
                 onClick={() => handleSelectAuthor(author)}
               >
