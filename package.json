@@ -15,6 +15,7 @@
     "@fontsource/open-sans": "^5.2.7",
     "axios": "^1.13.6",
     "clsx": "^2.1.1",
+    "lodash": "^4.17.23",
     "modern-normalize": "^3.0.1",
     "nuqs": "^2.8.9",
     "react": "^19.2.4",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.6",
     "@iconify/react": "^6.0.2",
+    "@types/lodash": "^4.17.24",
     "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

@@ -1,13 +1,9 @@
 import { Icon } from "@iconify/react";
 import { useMemo } from "react";
+import { Order } from "@/enums/Order";
 import { useFilterContext } from "@/providers/FilterProvider";
 import Button from "../Button";
 import styles from "./index.module.scss";
-
-enum Order {
-  Asc = "asc",
-  Desc = "desc",
-}
 
 const orderOptionsLabelMap: Record<Order, string> = {
   [Order.Asc]: "Newest first",

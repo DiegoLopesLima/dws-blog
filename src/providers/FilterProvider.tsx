@@ -1,5 +1,6 @@
 import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryState } from "nuqs";
 import { createContext, useContext } from "react";
+import { Order } from "@/enums/Order";
 
 export type FilterContextValue = {
   searchFilter: string;
@@ -10,8 +11,8 @@ export type FilterContextValue = {
   setAuthorsFilter: (authors: string[]) => void;
   filterOrderBy: string;
   setFilterOrderBy: (orderBy: string) => void;
-  filterOrder: "asc" | "desc";
-  setFilterOrder: (order: "asc" | "desc") => void;
+  filterOrder: Order;
+  setFilterOrder: (order: Order) => void;
 };
 
 export const FilterContext = createContext<FilterContextValue | null>(null);
@@ -34,7 +35,10 @@ function FilterProvider({ children }: { children: React.ReactNode }) {
   );
   const [authorsFilter, setAuthorsFilter] = useQueryState("authors", parseAsArrayOf(parseAsString).withDefault([]));
   const [filterOrderBy, setFilterOrderBy] = useQueryState("orderBy", parseAsString.withDefault("createdAt"));
-  const [filterOrder, setFilterOrder] = useQueryState("order", parseAsStringEnum(["asc", "desc"]).withDefault("desc"));
+  const [filterOrder, setFilterOrder] = useQueryState(
+    "order",
+    parseAsStringEnum([Order.Asc, Order.Desc]).withDefault(Order.Desc),
+  );
 
   return (
     <FilterContext.Provider

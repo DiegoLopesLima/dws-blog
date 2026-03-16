@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import { clsx } from "clsx";
 import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import { useDebounceValue } from "usehooks-ts";
 import { HALF_SECOND_IN_MILLISECONDS } from "@/contants/time";
 import { useFilterContext } from "@/providers/FilterProvider";
@@ -14,6 +15,9 @@ function SearchField() {
   const { searchFilter, setSearchFilter } = useFilterContext();
   const [search, setSearch] = useState(searchFilter ?? "");
   const [debouncedSearch] = useDebounceValue(search, HALF_SECOND_IN_MILLISECONDS);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
 
   const handleClickButton = () => {
     inputRef.current?.focus();
@@ -26,8 +30,14 @@ function SearchField() {
   };
 
   useEffect(() => {
-    setSearchFilter(debouncedSearch);
-  }, [debouncedSearch, setSearchFilter]);
+    if (isHomePage) {
+      setSearchFilter(debouncedSearch);
+    } else if (debouncedSearch.length > 0) {
+      navigate("/")?.then(() => {
+        setSearchFilter(debouncedSearch);
+      });
+    }
+  }, [debouncedSearch, setSearchFilter, isHomePage, navigate]);
 
   return (
     <div
