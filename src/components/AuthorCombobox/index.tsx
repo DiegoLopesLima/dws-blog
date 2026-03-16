@@ -6,7 +6,11 @@ import Combobox, { type ComboboxOption } from "../Combobox";
 
 function AuthorCombobox() {
   const { authorsFilter, setAuthorsFilter } = useFilterContext();
-  const { isPending, data: authors } = useQuery({
+  const {
+    isPending,
+    error: authorsError,
+    data: authors,
+  } = useQuery({
     queryKey: ["authors"],
     queryFn: () => getAuthors(),
   });
@@ -36,6 +40,10 @@ function AuthorCombobox() {
       })) ?? []
     );
   }, [authors]);
+
+  if (authorsError) {
+    return null;
+  }
 
   return <Combobox label={label} options={options} value={parsedAuthorsFilter} onChange={handleChange} />;
 }

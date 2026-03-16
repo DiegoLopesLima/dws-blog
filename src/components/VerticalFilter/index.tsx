@@ -11,12 +11,20 @@ import Button from "../Button";
 import styles from "./index.module.scss";
 
 function VerticalFilter() {
-  const { isPending: isCategoriesPending, data: categories } = useQuery({
+  const {
+    isPending: isCategoriesPending,
+    error: categoriesError,
+    data: categories,
+  } = useQuery({
     queryKey: ["categories"],
     queryFn: () => getCategories(),
   });
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
-  const { isPending: isAuthorsPending, data: authors } = useQuery({
+  const {
+    isPending: isAuthorsPending,
+    error: authorsError,
+    data: authors,
+  } = useQuery({
     queryKey: ["authors"],
     queryFn: () => getAuthors(),
   });
@@ -71,6 +79,8 @@ function VerticalFilter() {
           <div className={styles["vertical-filter-box-options-list"]}>
             {isCategoriesPending ? (
               <div>Loading...</div>
+            ) : categoriesError ? (
+              <div>The categories could not be loaded.</div>
             ) : (
               categories?.map((category) => (
                 <button
@@ -96,6 +106,8 @@ function VerticalFilter() {
           <div className={styles["vertical-filter-box-options-list"]}>
             {isAuthorsPending ? (
               <div>Loading...</div>
+            ) : authorsError ? (
+              <div>The authors could not be loaded.</div>
             ) : (
               authors?.map((author) => (
                 <button

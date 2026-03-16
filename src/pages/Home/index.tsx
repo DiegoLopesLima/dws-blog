@@ -11,7 +11,11 @@ import { getPosts } from "@/services/posts";
 import styles from "./index.module.scss";
 
 function HomePage() {
-  const { isPending, data: posts } = useQuery({
+  const {
+    isPending,
+    error: postsError,
+    data: posts,
+  } = useQuery({
     queryKey: ["posts"],
     queryFn: () => getPosts(),
   });
@@ -49,7 +53,15 @@ function HomePage() {
       <Container className={styles["home-page-container"]}>
         <VerticalFilter />
 
-        <main>{isPending ? <PostGridSkeleton /> : <PostGrid posts={filteredPosts} />}</main>
+        <main>
+          {isPending ? (
+            <PostGridSkeleton />
+          ) : postsError ? (
+            <div>The posts could not be loaded.</div>
+          ) : (
+            <PostGrid posts={filteredPosts} />
+          )}
+        </main>
       </Container>
     </div>
   );

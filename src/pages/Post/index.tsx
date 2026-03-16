@@ -10,7 +10,11 @@ import styles from "./index.module.scss";
 function PostPage() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { isPending, data: post } = useQuery({
+  const {
+    isPending,
+    error: postError,
+    data: post,
+  } = useQuery({
     queryKey: ["post", id],
     queryFn: () => (id ? getPostById(id) : null),
   });
@@ -33,6 +37,8 @@ function PostPage() {
         <Container>
           {isPending ? (
             <div>Loading...</div>
+          ) : postError ? (
+            <div>The post could not be loaded.</div>
           ) : (
             post && (
               <>

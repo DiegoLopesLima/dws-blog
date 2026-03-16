@@ -6,7 +6,11 @@ import Combobox, { type ComboboxOption } from "../Combobox";
 
 function CategoryCombobox() {
   const { categoriesFilter, setCategoriesFilter } = useFilterContext();
-  const { isPending, data: categories } = useQuery({
+  const {
+    isPending,
+    error: categoriesError,
+    data: categories,
+  } = useQuery({
     queryKey: ["categories"],
     queryFn: () => getCategories(),
   });
@@ -36,6 +40,10 @@ function CategoryCombobox() {
       })) ?? []
     );
   }, [categories]);
+
+  if (categoriesError) {
+    return null;
+  }
 
   return <Combobox label={label} options={options} value={parsedCategoriesFilter} onChange={handleChange} />;
 }
