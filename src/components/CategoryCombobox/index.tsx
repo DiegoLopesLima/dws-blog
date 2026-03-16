@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useFilterContext } from "@/providers/FilterProvider";
 import { getCategories } from "@/services/categories";
-import type { Category } from "@/types/category";
+import type { Category } from "@/types/Category";
 import Combobox, { type ComboboxOption } from "../Combobox";
 
 function CategoryCombobox() {

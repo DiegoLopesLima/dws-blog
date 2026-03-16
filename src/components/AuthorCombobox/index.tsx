@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useFilterContext } from "@/providers/FilterProvider";
 import { getAuthors } from "@/services/authors";
-import type { Author } from "@/types/author";
+import type { Author } from "@/types/Author";
 import Combobox, { type ComboboxOption } from "../Combobox";
 
 function AuthorCombobox() {

@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
 import InlinePost from "@/components/InlinePost";
-import type { Post } from "@/types/post";
+import type { Post } from "@/types/Post";
 import styles from "./index.module.scss";
 
 type PostGridProps = HTMLAttributes<HTMLDivElement> & {

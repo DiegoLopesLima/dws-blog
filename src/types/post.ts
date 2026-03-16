@@ -1,5 +1,5 @@
-import type { Author } from "./author";
-import type { Category } from "./category";
+import type { Author } from "./Author";
+import type { Category } from "./Category";
 
 export type Post = {
   id: string;

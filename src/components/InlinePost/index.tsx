@@ -2,7 +2,7 @@ import type { HTMLAttributes } from "react";
 import { NavLink } from "react-router";
 import CategoryBadge from "@/components/CategoryBadge";
 import { dateFormatter } from "@/formatters/time";
-import type { Post } from "@/types/post";
+import type { Post } from "@/types/Post";
 import styles from "./index.module.scss";
 
 type InlinePostProps = HTMLAttributes<HTMLDivElement> & {

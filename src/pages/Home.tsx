@@ -5,7 +5,7 @@ import MobileFilter from "@/components/MobileFilter";
 import PostGrid from "@/components/PostGrid";
 import { useFilterContext } from "@/providers/FilterProvider";
 import { getPosts } from "@/services/posts";
-import type { Post } from "@/types/post";
+import type { Post } from "@/types/Post";
 
 function HomePage() {
   const [posts, setPosts] = useState<Post[]>([]);
