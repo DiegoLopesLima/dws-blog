@@ -9,9 +9,7 @@ function App() {
       <FilterProvider>
         <LayoutHeader />
 
-        <main>
-          <Outlet />
-        </main>
+        <Outlet />
       </FilterProvider>
     </NuqsAdapter>
   );

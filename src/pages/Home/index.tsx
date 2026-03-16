@@ -1,11 +1,13 @@
 import { deburr } from "lodash";
 import { useEffect, useMemo, useState } from "react";
 import Container from "@/components/Container";
-import MobileFilter from "@/components/MobileFilter";
+import HorizontalFilter from "@/components/HorizontalFilter";
 import PostGrid from "@/components/PostGrid";
+import VerticalFilter from "@/components/VerticalFilter";
 import { useFilterContext } from "@/providers/FilterProvider";
 import { getPosts } from "@/services/posts";
 import type { Post } from "@/types/Post";
+import styles from "./index.module.scss";
 
 function HomePage() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -41,15 +43,19 @@ function HomePage() {
   }, []);
 
   return (
-    <>
+    <div className={styles["home-page"]}>
       <Container>
-        <MobileFilter />
+        <HorizontalFilter />
       </Container>
 
-      <Container>
-        <PostGrid posts={filteredPosts} />
+      <Container className={styles["home-page-container"]}>
+        <VerticalFilter />
+
+        <main>
+          <PostGrid posts={filteredPosts} />
+        </main>
       </Container>
-    </>
+    </div>
   );
 }
 

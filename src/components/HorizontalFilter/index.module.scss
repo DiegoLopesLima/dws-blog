@@ -1,0 +1,33 @@
+@use "@/styles/variables" as *;
+
+.horizontal-filter {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  align-items: center;
+
+  &-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    @media (min-width: $breakpoint-lg) {
+      display: none;
+    }
+  }
+
+  &-title {
+    display: none;
+    font-size: $heading-2-font-size;
+    font-weight: $heading-2-font-weight;
+    line-height: $heading-2-line-height;
+    margin-bottom: 0;
+    margin-top: 0;
+
+    @media (min-width: $breakpoint-lg) {
+      display: block;
+    }
+  }
+}

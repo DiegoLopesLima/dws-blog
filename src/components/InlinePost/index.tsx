@@ -36,6 +36,8 @@ function InlinePost({ post, ...props }: InlinePostProps) {
           </time>
         </div>
 
+        <div className={styles["inline-post-caption-separator"]} />
+
         <div>
           <span className="sr-only">By</span>
 

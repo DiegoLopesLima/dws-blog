@@ -1,0 +1,11 @@
+@use "@/styles/variables" as *;
+
+.home-page {
+  @media (min-width: $breakpoint-lg) {
+    &-container {
+      display: grid;
+      grid-template-columns: 275px 1fr;
+      gap: 1.5rem;
+    }
+  }
+}

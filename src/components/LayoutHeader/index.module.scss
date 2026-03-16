@@ -5,6 +5,10 @@
   border-bottom: 1px solid $neutral-extra-light;
   margin-bottom: 1.5rem;
   height: 90px;
+  background-color: #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
   &-container {
     height: 100%;

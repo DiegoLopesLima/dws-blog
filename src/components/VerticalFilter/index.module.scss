@@ -1,0 +1,80 @@
+@use "sass:color";
+@use "@/styles/variables" as *;
+
+.vertical-filter {
+  display: none;
+
+  @media (min-width: $breakpoint-lg) {
+    display: flex;
+  }
+
+  &-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 1rem;
+    border: 1px solid $neutral-extra-light;
+    height: fit-content;
+    padding: 1rem;
+    background-color: #FFFFFF;
+
+    &-header {
+      margin-bottom: 1rem;
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: $heading-3-font-size;
+      font-weight: $heading-3-font-weight;
+      line-height: $heading-3-line-height;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    &-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+
+      &-title {
+        font-size: $text-base;
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+
+      &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        &-item {
+          display: flex;
+          background-color: transparent;
+          border: none;
+          padding: 0.75rem;
+          border: 1px solid transparent;
+          border-radius: 0.5rem;
+          cursor: pointer;
+          font-size: $text-sm;
+          transition:
+            color 0.25s ease-in-out,
+            background-color 0.25s ease-in-out,
+            border-color 0.25s ease-in-out;
+
+          &:hover {
+            color: $accent-medium;
+          }
+
+          &-selected {
+            color: $accent-dark;
+            background-color: color.change($accent-light, $alpha: 0.05);
+            border-color: $accent-dark;
+          }
+        }
+      }
+    }
+  }
+}
