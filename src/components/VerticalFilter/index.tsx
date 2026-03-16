@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { useQuery } from "@tanstack/react-query";
 import { clsx } from "clsx";
 import { useEffect, useState } from "react";
 import { useFilterContext } from "@/providers/FilterProvider";
@@ -10,35 +11,29 @@ import Button from "../Button";
 import styles from "./index.module.scss";
 
 function VerticalFilter() {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const { isPending: isCategoriesPending, data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => getCategories(),
+  });
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
-  const [authors, setAuthors] = useState<Author[]>([]);
+  const { isPending: isAuthorsPending, data: authors } = useQuery({
+    queryKey: ["authors"],
+    queryFn: () => getAuthors(),
+  });
   const [selectedAuthors, setSelectedAuthors] = useState<Author[]>([]);
   const { categoriesFilter, authorsFilter, setCategoriesFilter, setAuthorsFilter } = useFilterContext();
 
   useEffect(() => {
-    getCategories().then((categories) => {
-      setCategories(categories);
-    });
-  }, []);
-
-  useEffect(() => {
-    getAuthors().then((authors) => {
-      setAuthors(authors);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (categories.length > 0) {
-      setSelectedCategories(categories.filter((category) => categoriesFilter.includes(category.id)));
+    if (categories?.length && categories?.length > 0) {
+      setSelectedCategories(categories?.filter((category) => categoriesFilter.includes(category.id)));
     }
-  }, [categories.length, categoriesFilter, categories]);
+  }, [categories?.length, categoriesFilter, categories]);
 
   useEffect(() => {
-    if (authors.length > 0) {
+    if (authors?.length && authors?.length > 0) {
       setSelectedAuthors(authors.filter((author) => authorsFilter.includes(author.id)));
     }
-  }, [authors.length, authorsFilter, authors]);
+  }, [authors?.length, authorsFilter, authors]);
 
   const handleSelectCategory = (category: Category) => {
     setSelectedCategories((state) =>
@@ -74,20 +69,24 @@ function VerticalFilter() {
           <h3 className={styles["vertical-filter-box-options-title"]}>Category</h3>
 
           <div className={styles["vertical-filter-box-options-list"]}>
-            {categories.map((category) => (
-              <button
-                type="button"
-                key={category.id}
-                className={clsx(styles["vertical-filter-box-options-list-item"], {
-                  [styles["vertical-filter-box-options-list-item-selected"]]: selectedCategories.some(
-                    (selectedCategory) => selectedCategory.id === category.id,
-                  ),
-                })}
-                onClick={() => handleSelectCategory(category)}
-              >
-                {category.name}
-              </button>
-            ))}
+            {isCategoriesPending ? (
+              <div>Loading...</div>
+            ) : (
+              categories?.map((category) => (
+                <button
+                  type="button"
+                  key={category.id}
+                  className={clsx(styles["vertical-filter-box-options-list-item"], {
+                    [styles["vertical-filter-box-options-list-item-selected"]]: selectedCategories.some(
+                      (selectedCategory) => selectedCategory.id === category.id,
+                    ),
+                  })}
+                  onClick={() => handleSelectCategory(category)}
+                >
+                  {category.name}
+                </button>
+              ))
+            )}
           </div>
         </div>
 
@@ -95,20 +94,24 @@ function VerticalFilter() {
           <h3 className={styles["vertical-filter-box-options-title"]}>Author</h3>
 
           <div className={styles["vertical-filter-box-options-list"]}>
-            {authors.map((author) => (
-              <button
-                type="button"
-                key={author.id}
-                className={clsx(styles["vertical-filter-box-options-list-item"], {
-                  [styles["vertical-filter-box-options-list-item-selected"]]: selectedAuthors.some(
-                    (selectedAuthor) => selectedAuthor.id === author.id,
-                  ),
-                })}
-                onClick={() => handleSelectAuthor(author)}
-              >
-                {author.name}
-              </button>
-            ))}
+            {isAuthorsPending ? (
+              <div>Loading...</div>
+            ) : (
+              authors?.map((author) => (
+                <button
+                  type="button"
+                  key={author.id}
+                  className={clsx(styles["vertical-filter-box-options-list-item"], {
+                    [styles["vertical-filter-box-options-list-item-selected"]]: selectedAuthors.some(
+                      (selectedAuthor) => selectedAuthor.id === author.id,
+                    ),
+                  })}
+                  onClick={() => handleSelectAuthor(author)}
+                >
+                  {author.name}
+                </button>
+              ))
+            )}
           </div>
         </div>
 

@@ -1,19 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
 import { deburr } from "lodash";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import Container from "@/components/Container";
 import HorizontalFilter from "@/components/HorizontalFilter";
 import PostGrid from "@/components/PostGrid";
+import PostGridSkeleton from "@/components/PostGridSkeleton";
 import VerticalFilter from "@/components/VerticalFilter";
 import { useFilterContext } from "@/providers/FilterProvider";
 import { getPosts } from "@/services/posts";
-import type { Post } from "@/types/Post";
 import styles from "./index.module.scss";
 
 function HomePage() {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const { isPending, data: posts } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => getPosts(),
+  });
   const { searchFilter, categoriesFilter, authorsFilter, filterOrderBy, filterOrder } = useFilterContext();
   const filteredPosts = useMemo(() => {
-    return posts
+    return (posts ?? [])
       .filter((post) =>
         deburr(`${post.title} ${post.content}`).toLowerCase().includes(deburr(searchFilter).toLowerCase()),
       )
@@ -36,12 +40,6 @@ function HomePage() {
       });
   }, [posts, searchFilter, categoriesFilter, authorsFilter, filterOrder, filterOrderBy]);
 
-  useEffect(() => {
-    getPosts().then((posts) => {
-      setPosts(posts);
-    });
-  }, []);
-
   return (
     <div className={styles["home-page"]}>
       <Container>
@@ -51,9 +49,7 @@ function HomePage() {
       <Container className={styles["home-page-container"]}>
         <VerticalFilter />
 
-        <main>
-          <PostGrid posts={filteredPosts} />
-        </main>
+        <main>{isPending ? <PostGridSkeleton /> : <PostGrid posts={filteredPosts} />}</main>
       </Container>
     </div>
   );
