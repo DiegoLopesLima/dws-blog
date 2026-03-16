@@ -1,5 +1,5 @@
 import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryState } from "nuqs";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { Order } from "@/enums/Order";
 
 export type FilterContextValue = {
@@ -40,24 +40,33 @@ function FilterProvider({ children }: { children: React.ReactNode }) {
     parseAsStringEnum([Order.Asc, Order.Desc]).withDefault(Order.Desc),
   );
 
-  return (
-    <FilterContext.Provider
-      value={{
-        searchFilter,
-        setSearchFilter,
-        categoriesFilter,
-        setCategoriesFilter,
-        authorsFilter,
-        setAuthorsFilter,
-        filterOrderBy,
-        setFilterOrderBy,
-        filterOrder,
-        setFilterOrder,
-      }}
-    >
-      {children}
-    </FilterContext.Provider>
-  );
+  const value = useMemo(() => {
+    return {
+      searchFilter,
+      setSearchFilter,
+      categoriesFilter,
+      setCategoriesFilter,
+      authorsFilter,
+      setAuthorsFilter,
+      filterOrderBy,
+      setFilterOrderBy,
+      filterOrder,
+      setFilterOrder,
+    };
+  }, [
+    searchFilter,
+    setSearchFilter,
+    categoriesFilter,
+    setCategoriesFilter,
+    authorsFilter,
+    setAuthorsFilter,
+    filterOrderBy,
+    setFilterOrderBy,
+    filterOrder,
+    setFilterOrder,
+  ]);
+
+  return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>;
 }
 
 export default FilterProvider;
