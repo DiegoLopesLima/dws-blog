@@ -20,6 +20,8 @@ function InlinePost({ post, ...props }: InlinePostProps) {
           src={post.thumbnail_url}
           alt=""
           className={styles["inline-post-thumbnail"]}
+          width={396}
+          height={223}
           loading="lazy"
           decoding="async"
         />

@@ -6,3 +6,9 @@ export const getPosts = async () => {
 
   return response.data;
 };
+
+export const getPostById = async (id: string) => {
+  const response = await api.get<Post>(`/posts/${id}`);
+
+  return response.data;
+};

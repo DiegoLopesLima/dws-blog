@@ -1,0 +1,40 @@
+@use "@/styles/variables" as *;
+
+.post-author {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  align-items: center;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &-name {
+    font-size: $text-sm;
+    font-weight: $text-sm-font-weight;
+    line-height: $text-sm-line-height;
+    color: $neutral-darkest;
+
+    &-label {
+      color: $neutral-darkest;
+      margin-right: 0.25rem;
+    }
+
+    &-value {
+      font-size: $text-sm;
+      font-weight: 600;
+      line-height: $text-sm-line-height;
+      color: $neutral-darkest;
+    }
+  }
+
+  &-date {
+    font-size: $text-sm;
+    font-weight: $text-sm-font-weight;
+    line-height: $text-sm-line-height;
+    color: $neutral-medium;
+  }
+}
